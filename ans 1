@@ -1,0 +1,27 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Load data from file
+data = np.loadtxt('Data_1.txt')  # We can Replace with 'Data_2.txt' for the second dataset
+
+# Initialize lists to store indices of peaks
+maxima_indices = []
+minima_indices = []
+
+# Iterate through the data to find peaks
+for i in range(1, len(data) - 1):
+    if data[i] > data[i - 1] and data[i] > data[i + 1]:
+        maxima_indices.append(i)
+    elif data[i] < data[i - 1] and data[i] < data[i + 1]:
+        minima_indices.append(i)
+
+# Print indices of maxima and minima
+print("Maxima indices:", maxima_indices)
+print("Minima indices:", minima_indices)
+
+# Plot the data with maxima and minima
+plt.plot(data, label='Signal')
+plt.scatter(maxima_indices, data[maxima_indices], color='red', label='Maxima')
+plt.scatter(minima_indices, data[minima_indices], color='blue', label='Minima')
+plt.legend()
+plt.show()
